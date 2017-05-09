@@ -1,0 +1,24 @@
+spring:
+    datasource:
+        password: jsca
+        testWhileIdle: true
+        url: jdbc:mysql://localhost:3306/utility_directory?useSSL=false
+        username: jsca
+        validationQuery: SELECT 1
+    jpa:
+        hibernate:
+            ddl-auto: update
+            naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.MySQL5Dialect
+        show-sql: true
+
+---
+spring:
+    profiles: test
+    datasource:
+      driverClassName: org.h2.Driver
+      url: jdbc:h2:mem:utility_directory;MODE=PostgreSQL
+      schema: classpath:/schema.sql
+      defaultAutoCommit: false
