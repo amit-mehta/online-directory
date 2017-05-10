@@ -22,7 +22,7 @@ public class ProviderServiceImpl {
     private ProviderConverter providerConverter;
 
     public List<ProviderModel> findAll() {
-        Iterable<Provider> providers = providerDao.findAll();
+        Iterable<Provider> providers = providerDao.findAllProviderWithService();
         List<ProviderModel> providerModels = new ArrayList<>();
         providers.forEach(provider -> {
             providerModels.add(providerModelConverter.convert(provider));
@@ -35,5 +35,9 @@ public class ProviderServiceImpl {
         Provider savedProvider = providerDao.save(provider);
         providerModel.setId(savedProvider.getId());
         return providerModel;
+    }
+
+    public ProviderModel findOne(Long id) {
+        return providerModelConverter.convert(providerDao.findOne(id));
     }
 }

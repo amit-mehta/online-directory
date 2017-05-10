@@ -1,13 +1,11 @@
 package org.dadabhagwan.service;
 
-import org.dadabhagwan.dao.Category;
 import org.dadabhagwan.dao.ServiceDetail;
 import org.dadabhagwan.dao.ServiceDetailDao;
 import org.dadabhagwan.model.ServiceDetailModel;
 import org.dadabhagwan.service.converter.ServiceDetailConverter;
 import org.dadabhagwan.service.converter.ServiceDetailModelConverter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,7 +24,7 @@ public class ServiceDetailServiceImpl {
 
     @Transactional
     public List<ServiceDetailModel> findAll() {
-        Iterable<ServiceDetail> serviceDetails = serviceDetailDao.findAll();
+        Iterable<ServiceDetail> serviceDetails = serviceDetailDao.findAllServiceWithCategoryAndProvider();
         List<ServiceDetailModel> serviceDetailModels = new ArrayList<>();
         serviceDetails.forEach(service -> {
             serviceDetailModels.add(modelConverter.convert(service));
@@ -43,4 +41,7 @@ public class ServiceDetailServiceImpl {
     }
 
 
+    public ServiceDetailModel findOne(Long id) {
+        return modelConverter.convert(serviceDetailDao.findOne(id));
+    }
 }

@@ -22,17 +22,13 @@ public class ServiceDetailModelConverter implements Converter<ServiceDetail, Ser
 
     @Override
     public ServiceDetailModel convert(ServiceDetail serviceDetail) {
-        ServiceDetailModel serviceDetailModel = new ServiceDetailModel();
-        serviceDetailModel.setId(serviceDetail.getId());
-        serviceDetailModel.setServiceName(serviceDetail.getServiceName());
-
         CategoryModel categoryModel = CategoryModel.builder().id(serviceDetail.getCategory().getId()).build();
-        serviceDetailModel.setCategory(categoryModel);
 
         List<Provider> providers = serviceDetail.getProviders();
         List<ProviderModel> providerModels = providers.stream().map(provider -> providerModelConverter.convert(provider))
                 .collect(Collectors.toList());
-        serviceDetailModel.setProviders(providerModels);
-        return serviceDetailModel;
+
+        return ServiceDetailModel.builder().id(serviceDetail.getId()).serviceName(serviceDetail.getServiceName())
+                .category(categoryModel).providers(providerModels).build();
     }
 }

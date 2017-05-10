@@ -6,9 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CategoryDao extends CrudRepository<Category, Long> {
-//    @Query("SELECT p FROM Person p JOIN FETCH p.roles WHERE p.id = (:id)")
 
-    @Query("SELECT c FROM Category c JOIN FETCH c.serviceDetails")
+    @Query("SELECT distinct c FROM Category c LEFT JOIN FETCH c.serviceDetails")
     Iterable<Category> findAllCategoriesWithServices();
-
 }

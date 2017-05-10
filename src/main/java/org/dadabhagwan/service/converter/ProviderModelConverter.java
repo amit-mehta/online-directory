@@ -9,21 +9,17 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProviderModelConverter implements Converter<Provider, ProviderModel>{
+public class ProviderModelConverter implements Converter<Provider, ProviderModel> {
 
     @Autowired
     private ServiceDetailModelConverter serviceDetailModelConverter;
 
     @Override
     public ProviderModel convert(Provider provider) {
-        ProviderModel providerModel = new ProviderModel();
-        providerModel.setId(provider.getId());
-        providerModel.setContact(provider.getContact());
-        providerModel.setProviderName(provider.getProviderName());
-        providerModel.setReference(provider.getReference());
-
-        ServiceDetail serviceDetail = provider.getServiceDetail();
-        providerModel.setServiceDetail(ServiceDetailModel.builder().id(serviceDetail.getId()).build());
-        return providerModel;
+        ServiceDetailModel service = ServiceDetailModel.builder().id(provider.getServiceDetail().getId()).build();
+        return ProviderModel.builder().id(provider.getId()).contact(provider.getContact())
+                .providerName(provider.getProviderName()).reference(provider.getReference())
+                .serviceDetail(service)
+                .build();
     }
 }

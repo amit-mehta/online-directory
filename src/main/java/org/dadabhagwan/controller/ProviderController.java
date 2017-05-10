@@ -4,6 +4,8 @@ import org.dadabhagwan.model.ProviderModel;
 import org.dadabhagwan.service.ProviderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +24,11 @@ public class ProviderController {
     @RequestMapping(method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<ProviderModel> findAll() {
         return providerService.findAll();
+    }
+
+    @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ProviderModel findOne(@PathVariable Long id) {
+        return providerService.findOne(id);
     }
 
     @PostMapping(produces = {MediaType.APPLICATION_JSON_VALUE})

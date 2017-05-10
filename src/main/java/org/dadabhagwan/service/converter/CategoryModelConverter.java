@@ -22,7 +22,9 @@ public class CategoryModelConverter implements Converter<Category, CategoryModel
         categoryModel.setId(category.getId());
         categoryModel.setName(category.getCategoryName());
         List<ServiceDetailModel> serviceDetailModels = category.getServiceDetails().stream()
-                .map(serviceDetail -> serviceDetailModelConverter.convert(serviceDetail)).collect(Collectors.toList());
+                .map(serviceDetail ->
+                        ServiceDetailModel.builder().id(serviceDetail.getId())
+                                .serviceName(serviceDetail.getServiceName()).build()).collect(Collectors.toList());
         categoryModel.setServiceDetails(serviceDetailModels);
         return categoryModel;
     }
