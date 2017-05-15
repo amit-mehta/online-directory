@@ -1,9 +1,9 @@
 spring:
     datasource:
-        password: jsca
+#        password: jsca
         testWhileIdle: true
-        url: jdbc:mysql://localhost:3306/utility_directory?useSSL=false
-        username: jsca
+#        url: jdbc:mysql://localhost:3306/utility_directory?useSSL=false
+#        username: jsca
         validationQuery: SELECT 1
     jpa:
         hibernate:
@@ -11,7 +11,7 @@ spring:
             naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
         properties:
             hibernate:
-                dialect: org.hibernate.dialect.MySQL5Dialect
+                dialect: org.hibernate.dialect.PostgreSQLDialect
         show-sql: true
 
 ---
