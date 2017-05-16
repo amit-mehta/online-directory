@@ -1,10 +1,4 @@
 spring:
-    datasource:
-#        password: jsca
-        testWhileIdle: true
-#        url: jdbc:mysql://localhost:3306/utility_directory?useSSL=false
-#        username: jsca
-        validationQuery: SELECT 1
     jpa:
         hibernate:
             ddl-auto: update
@@ -12,6 +6,23 @@ spring:
         properties:
             hibernate:
                 dialect: org.hibernate.dialect.PostgreSQLDialect
+        show-sql: true
+---
+spring:
+    profile: local
+    datasource:
+        password: jsca
+        testWhileIdle: true
+        url: jdbc:mysql://localhost:3306/utility_directory?useSSL=false
+        username: jsca
+        validationQuery: SELECT 1
+    jpa:
+        hibernate:
+            ddl-auto: update
+            naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.MySQLDialect
         show-sql: true
 
 ---
