@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CategoryModel {
-    @NotNull
+    @NotNull(message = "Category Id cannot be null")
     private Long id;
     private String name;
     private List<ServiceDetailModel> serviceDetails;

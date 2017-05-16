@@ -24,7 +24,6 @@ public class CategoryServiceImpl {
     @Autowired
     private CategoryConverter categoryConverter;
 
-//    @Transactional
     public List<CategoryModel> findAll() {
         Iterable<Category> categories = categoryDao.findAllCategoriesWithServices();
         List<CategoryModel> categoryModels = new ArrayList<>();
